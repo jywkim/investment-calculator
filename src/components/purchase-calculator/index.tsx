@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './purchase-calculator.css';
 
 interface Props {
 
@@ -48,15 +49,15 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
     const { shareQuantity, sharePrice, subTotal } = this.state;
 
     return (
-      <div>
-        <label htmlFor="shareQuantity">Share Quantity</label>
-        <input name="shareQuantity" value={shareQuantity} onChange={this.handleOnChange}/>
+      <div className="purchaseContainer">
+        <label htmlFor="shareQuantity" className="rowData">Share Quantity</label>
+        <input name="shareQuantity" value={shareQuantity} onChange={this.handleOnChange} className="rowData"/>
 
-        <label htmlFor="sharePrice">Share Price</label>
-        <input name="sharePrice" value={sharePrice} onChange={this.handleOnChange}/>
+        <label htmlFor="sharePrice" className="rowData">Share Price</label>
+        <input name="sharePrice" value={sharePrice} onChange={this.handleOnChange} className="rowData"/>
 
-        <label htmlFor="subTotal">Subtotal</label>
-        <input name="subTotal" value={subTotal} onChange={this.handleOnChange}/>
+        <label htmlFor="subTotal" className="rowData">Subtotal</label>
+        <input name="subTotal" value={subTotal} onChange={this.handleOnChange} className="rowData"/>
       </div>
     );
   }
