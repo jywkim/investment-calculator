@@ -50,6 +50,7 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
 
     return (
       <div className="purchaseContainer">
+        <h3>Purchase</h3>
         <label htmlFor="shareQuantity" className="rowData">Share Quantity</label>
         <input name="shareQuantity" value={shareQuantity} onChange={this.handleOnChange} className="rowData"/>
 
