@@ -49,8 +49,13 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
 
     return (
       <div>
+        <label htmlFor="shareQuantity">Share Quantity</label>
         <input name="shareQuantity" value={shareQuantity} onChange={this.handleOnChange}/>
+
+        <label htmlFor="sharePrice">Share Price</label>
         <input name="sharePrice" value={sharePrice} onChange={this.handleOnChange}/>
+
+        <label htmlFor="subTotal">Subtotal</label>
         <input name="subTotal" value={subTotal} onChange={this.handleOnChange}/>
       </div>
     );
