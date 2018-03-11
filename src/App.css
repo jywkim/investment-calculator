@@ -36,7 +36,8 @@ h3 {
   width: 400px;
   padding: 8px;
   border-radius: 4px;
-  margin: auto;
+  margin: 8px;
+  display: inline-block;
 }
 
 .rowData {
