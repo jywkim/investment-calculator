@@ -10,7 +10,7 @@ interface State {
   subTotal: number;
 }
 
-class PurchaseCalculator extends React.PureComponent<Props, State> {
+class SellCalculator extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -49,7 +49,7 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
 
     return (
       <div className="calculatorContainer">
-        <h3>Purchase</h3>
+        <h3>Sell</h3>
         <label htmlFor="shareQuantity" className="rowData">Share Quantity</label>
         <input name="shareQuantity" value={shareQuantity} onChange={this.handleOnChange} className="rowData"/>
 
@@ -63,4 +63,4 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
   }
 }
 
-export default PurchaseCalculator;
+export default SellCalculator;

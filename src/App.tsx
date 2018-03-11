@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import PurchaseCalculator from './components/purchase-calculator/index';
+import SellCalculator from './components/sell-calculator/index';
 
 const logo = require('./logo.svg');
 
@@ -14,6 +15,7 @@ class App extends React.Component {
         </header>
         <p className="App-intro">
           <PurchaseCalculator />
+          <SellCalculator />
         </p>
       </div>
     );
