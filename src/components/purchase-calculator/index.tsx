@@ -1,7 +1,12 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { updateField, UpdateFieldAction } from '../../actions/index';
+import { StoreState, Component } from '../../types/index';
 
 interface Props {
-
+  id: string;
+  component?: Component;
+  updateField?: UpdateFieldAction;
 }
 
 interface State {
@@ -63,4 +68,11 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
   }
 }
 
-export default PurchaseCalculator;
+function mapStateToProps({ components }: StoreState, props: Props) {
+  return {
+    component: components[props.id],
+    id: props.id
+  };
+}
+
+export default connect(mapStateToProps, { updateField })(PurchaseCalculator as any);
