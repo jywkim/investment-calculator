@@ -3,10 +3,23 @@ import './App.css';
 import PurchaseCalculator from './components/purchase-calculator/index';
 import SellCalculator from './components/sell-calculator/index';
 import * as componentNames from './constants/component-names';
+import { connect } from 'react-redux';
+import { addComponent } from './actions/index';
 
 const logo = require('./logo.svg');
 
-class App extends React.Component {
+interface Props {
+  /* tslint:disable no-any */
+  addComponent: any;
+}
+
+class App extends React.Component<Props> {
+
+  componentWillMount() {
+    this.props.addComponent(componentNames.purchaseShares);
+    this.props.addComponent(componentNames.sellShares);
+  }
+
   render() {
     return (
       <div className="App">
@@ -23,4 +36,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { addComponent })(App as any);

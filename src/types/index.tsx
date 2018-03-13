@@ -1,5 +1,6 @@
 export interface StoreState {
-  components: Map<string, Component>;
+  /* tslint:disable no-any */
+  components: any;
 }
 
 export interface Component {

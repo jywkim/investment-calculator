@@ -3,14 +3,14 @@ import * as ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
-import { field } from './reducers/index';
 import { StoreState } from './types/index';
 import { Provider } from 'react-redux';
+import { rootReducer } from './reducers/index';
 
 import './index.css';
 
-const store = createStore<StoreState>(field, {
-  components: new Map()
+const store = createStore<StoreState>(rootReducer, {
+  components: {}
 });
 
 ReactDOM.render(

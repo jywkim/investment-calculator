@@ -1,13 +1,35 @@
-import { UpdateFieldAction } from '../actions';
-import { StoreState } from '../types/index';
-import { UPDATE_FIELD } from '../constants/index';
+import { combineReducers, Reducer } from 'redux';
 
-export function field(state: StoreState, action: UpdateFieldAction): StoreState {
+import { UpdateFieldAction, componentAction } from '../actions';
+import { StoreState } from '../types/index';
+import { UPDATE_FIELD, ADD_COMPONENT } from '../constants/index';
+
+export const rootReducer: Reducer<StoreState> = combineReducers({
+  components
+});
+
+/* tslint:disable no-any */
+export function components(state: any, action: componentAction | UpdateFieldAction): StoreState {
   /* tslint:disable switch-default */
-  switch (action.type) {
+  if (!state) {
+    state = {
+
+    };
+  }
+
+  const { type, data } = action;
+
+  switch (type) {
+    case ADD_COMPONENT:
+      const newComponent = {
+        id: data.id,
+        shareQuantity: 0,
+        sharePrice: 0,
+        subTotal: 0
+      };
+      return { ...state, [data.id]: newComponent };
     case UPDATE_FIELD:
-    return state;
-      // return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
+    return { ...state, [data.id]: { ...data.fields, id: data.id } };
   }
   return state;
 }

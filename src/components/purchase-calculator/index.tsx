@@ -1,56 +1,44 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { updateField, UpdateFieldAction } from '../../actions/index';
-import { StoreState, Component } from '../../types/index';
+import { updateField } from '../../actions/index';
+import { StoreState } from '../../types/index';
 
+/* tslint:disable no-any */
 interface Props {
   id: string;
-  component?: Component;
-  updateField?: UpdateFieldAction;
+  component?: any;
+  updateField?: any;
 }
 
-interface State {
-  shareQuantity: number;
-  sharePrice: number;
-  subTotal: number;
-}
-
-class PurchaseCalculator extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      shareQuantity: 0,
-      sharePrice: 0,
-      subTotal: 0,
-    };
-  }
+class PurchaseCalculator extends React.PureComponent<Props> {
 
   /* tslint:disable no-any */
   handleOnChange = (e: any) => {
     const { name, value } = e.target;
-    const { shareQuantity, sharePrice, subTotal } = Object.assign({}, this.state, { [name]: value});
+    const { shareQuantity, sharePrice, subTotal } = Object.assign({}, this.props.component, { [name]: value});
+    /* tslint:disable no-shadowed-variable */
+    const { updateField, id } = this.props;
 
-    let state = this.state;
+    let fields = { ...this.props.component };
     if (name === 'shareQuantity' || name === 'sharePrice') {
-      state = {
+      fields = {
         shareQuantity,
         sharePrice,
         subTotal: shareQuantity * sharePrice,
       };
     } else if (name === 'subTotal') {
-      state = {
+      fields = {
         shareQuantity: subTotal / sharePrice,
         sharePrice,
         subTotal,
       };
     }
 
-    this.setState(state);
+    updateField(id, fields);
   }
 
   render() {
-    const { shareQuantity, sharePrice, subTotal } = this.state;
+    const { shareQuantity = 0, sharePrice = 0, subTotal = 0 } = this.props.component;
 
     return (
       <div className="calculatorContainer">
@@ -68,9 +56,9 @@ class PurchaseCalculator extends React.PureComponent<Props, State> {
   }
 }
 
-function mapStateToProps({ components }: StoreState, props: Props) {
+function mapStateToProps(state: StoreState, props: Props) {
   return {
-    component: components[props.id],
+    component: state.components[props.id],
     id: props.id
   };
 }
