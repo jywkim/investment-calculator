@@ -2,6 +2,7 @@ import * as React from 'react';
 import './App.css';
 import PurchaseCalculator from './components/purchase-calculator/index';
 import SellCalculator from './components/sell-calculator/index';
+import SummaryCalculator from './components/summary-calculator/index';
 import * as componentNames from './constants/component-names';
 import { connect } from 'react-redux';
 import { addComponent } from './actions/index';
@@ -30,6 +31,7 @@ class App extends React.Component<Props> {
         <div className="App-intro">
           <PurchaseCalculator id={componentNames.purchaseShares} />
           <SellCalculator id={componentNames.sellShares} />
+          <SummaryCalculator pid={componentNames.purchaseShares} sid={componentNames.sellShares} />
         </div>
       </div>
     );
