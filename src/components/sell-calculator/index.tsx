@@ -1,51 +1,44 @@
 import * as React from 'react';
+import { StoreState } from '../../types/index';
+import { connect } from 'react-redux';
+import { updateField } from '../../actions/index';
 
+/* tslint:disable no-any */
 interface Props {
   id: string;
+  component?: any;
+  updateField?: any;
 }
 
-interface State {
-  shareQuantity: number;
-  sharePrice: number;
-  subTotal: number;
-}
-
-class SellCalculator extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      shareQuantity: 0,
-      sharePrice: 0,
-      subTotal: 0,
-    };
-  }
+class SellCalculator extends React.PureComponent<Props> {
 
   /* tslint:disable no-any */
   handleOnChange = (e: any) => {
     const { name, value } = e.target;
-    const { shareQuantity, sharePrice, subTotal } = Object.assign({}, this.state, { [name]: value});
+    /* tslint:disable no-shadowed-variable */
+    const { id, updateField, component } = this.props;
+    const { shareQuantity, sharePrice, subTotal } = Object.assign({}, component, { [name]: value});
 
-    let state = this.state;
+    let fields = { ...component };
     if (name === 'shareQuantity' || name === 'sharePrice') {
-      state = {
+      fields = {
         shareQuantity,
         sharePrice,
         subTotal: shareQuantity * sharePrice,
       };
     } else if (name === 'subTotal') {
-      state = {
+      fields = {
         shareQuantity: subTotal / sharePrice,
         sharePrice,
         subTotal,
       };
     }
 
-    this.setState(state);
+    updateField(id, fields);
   }
 
   render() {
-    const { shareQuantity, sharePrice, subTotal } = this.state;
+    const { shareQuantity, sharePrice, subTotal } = this.props.component;
 
     return (
       <div className="calculatorContainer">
@@ -63,4 +56,11 @@ class SellCalculator extends React.PureComponent<Props, State> {
   }
 }
 
-export default SellCalculator;
+function mapStateToProps(state: StoreState, props: Props) {
+  return {
+    component: state.components[props.id],
+    id: props.id
+  };
+}
+
+export default connect(mapStateToProps, { updateField })(SellCalculator as any);
