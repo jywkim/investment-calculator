@@ -7,8 +7,6 @@ import * as componentNames from './constants/component-names';
 import { connect } from 'react-redux';
 import { addComponent } from './actions/index';
 
-const logo = require('./logo.svg');
-
 interface Props {
   /* tslint:disable no-any */
   addComponent: any;
@@ -25,8 +23,7 @@ class App extends React.Component<Props> {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Investment Calculator</h1>
+            <h1 className="App-title">INVESTMENT CALCULATOR</h1>
         </header>
         <div className="App-intro">
           <PurchaseCalculator id={componentNames.purchaseShares} />
