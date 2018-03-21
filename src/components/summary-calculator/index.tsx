@@ -26,7 +26,7 @@ class SummaryCalculator extends React.PureComponent<Props> {
       <div className="calculatorContainer" style={{ width: '834px' }}>
         <h3>GET RICH</h3>
         <label htmlFor="difference" className="rowData">Difference</label>
-        <input name="difference" value={difference} className="rowData" disabled />
+        <input name="difference" value={difference} className="rowData"/>
       </div>
     );
   }
